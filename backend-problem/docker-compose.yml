@@ -1,0 +1,132 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: vottery-postgres
+    environment:
+      POSTGRES_DB: sngine_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./shared/database/migrations:/docker-entrypoint-initdb.d
+    networks:
+      - vottery-network
+
+  auth-service:
+    build:
+      context: ./services/auth-service
+      dockerfile: Dockerfile
+    container_name: vottery-auth-service
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: sngine_db
+      DB_USER: postgres
+      DB_PASSWORD: password
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    volumes:
+      - ./services/auth-service:/app
+      - /app/node_modules
+    networks:
+      - vottery-network
+    restart: unless-stopped
+
+  biometric-service:
+    build:
+      context: ./services/biometric-service
+      dockerfile: Dockerfile
+    container_name: vottery-biometric-service
+    environment:
+      NODE_ENV: development
+      PORT: 3002
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: sngine_db
+      DB_USER: postgres
+      DB_PASSWORD: password
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+    volumes:
+      - ./services/biometric-service:/app
+      - /app/node_modules
+    networks:
+      - vottery-network
+    restart: unless-stopped
+
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    container_name: vottery-user-service
+    environment:
+      NODE_ENV: development
+      PORT: 3003
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: sngine_db
+      DB_USER: postgres
+      DB_PASSWORD: password
+    ports:
+      - "3003:3003"
+    depends_on:
+      - postgres
+    volumes:
+      - ./services/user-service:/app
+      - /app/node_modules
+    networks:
+      - vottery-network
+    restart: unless-stopped
+
+  api-gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: vottery-api-gateway
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      AUTH_SERVICE_URL: http://auth-service:3001
+      BIOMETRIC_SERVICE_URL: http://biometric-service:3002
+      USER_SERVICE_URL: http://user-service:3003
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth-service
+      - biometric-service
+      - user-service
+    volumes:
+      - ./gateway:/app
+      - /app/node_modules
+    networks:
+      - vottery-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: vottery-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - vottery-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  vottery-network:
+    driver: bridge

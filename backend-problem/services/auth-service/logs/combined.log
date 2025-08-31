@@ -1,0 +1,22 @@
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2025-08-19T11:36:44.384Z"}
+{"level":"info","message":"Environment: development","service":"auth-service","timestamp":"2025-08-19T11:36:44.385Z"}
+{"level":"info","message":"Database connected successfully","service":"auth-service","timestamp":"2025-08-19T11:36:44.400Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2025-08-19T11:38:09.722Z"}
+{"level":"info","message":"Environment: development","service":"auth-service","timestamp":"2025-08-19T11:38:09.723Z"}
+{"level":"info","message":"Database connected successfully","service":"auth-service","timestamp":"2025-08-19T11:38:09.765Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"auth-service","timestamp":"2025-08-19T11:47:41.792Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2025-08-19T12:30:05.882Z"}
+{"level":"info","message":"Environment: development","service":"auth-service","timestamp":"2025-08-19T12:30:05.883Z"}
+{"level":"error","message":"Error acquiring client:","service":"auth-service","timestamp":"2025-08-19T12:30:05.930Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2025-08-19T12:30:26.489Z"}
+{"level":"info","message":"Environment: development","service":"auth-service","timestamp":"2025-08-19T12:30:26.491Z"}
+{"level":"error","message":"Error acquiring client:","service":"auth-service","timestamp":"2025-08-19T12:30:26.528Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2025-08-19T12:30:26.914Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2025-08-19T12:30:27.566Z"}
+{"level":"info","message":"Environment: development","service":"auth-service","timestamp":"2025-08-19T12:30:27.567Z"}
+{"level":"error","message":"Error acquiring client:","service":"auth-service","timestamp":"2025-08-19T12:30:27.605Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"auth-service","timestamp":"2025-08-19T12:30:47.733Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2025-08-19T12:30:53.473Z"}
+{"level":"info","message":"Environment: development","service":"auth-service","timestamp":"2025-08-19T12:30:53.475Z"}
+{"level":"error","message":"Error acquiring client:","service":"auth-service","timestamp":"2025-08-19T12:30:53.513Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"auth-service","timestamp":"2025-08-19T12:31:41.341Z"}
